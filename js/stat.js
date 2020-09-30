@@ -16,7 +16,7 @@ const renderCloud = function(ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-const lightness = function () {
+const lightness = () => {
   return Math.floor(Math.random() * 100);
 }
 
