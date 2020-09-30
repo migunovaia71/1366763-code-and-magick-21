@@ -15,31 +15,22 @@ const similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .querySelector('.setup-similar-item');
 
 const getRandom = (arr) => {
-  return Math.floor(Math.random() * arr.length) + 1;
+  return Math.floor(Math.random() * arr.length);
 }
 
-const wizards = [
-  {
-    name: WIZARD_NAMES[getRandom(WIZARD_NAMES)] + ' ' + WIZARD_SURNAMES[getRandom(WIZARD_SURNAMES)],
-    coatColor: WIZARD_COAT[getRandom(WIZARD_COAT)],
-    eyesColor: WIZARD_EYES[getRandom(WIZARD_EYES)]
-  },
-  {
-    name: WIZARD_NAMES[getRandom(WIZARD_NAMES)] + WIZARD_SURNAMES[getRandom(WIZARD_SURNAMES)],
-    coatColor: WIZARD_COAT[getRandom(WIZARD_COAT)],
-    eyesColor: WIZARD_EYES[getRandom(WIZARD_EYES)]
-  },
-  {
-    name: WIZARD_NAMES[getRandom(WIZARD_NAMES)] + WIZARD_SURNAMES[getRandom(WIZARD_SURNAMES)],
-    coatColor: WIZARD_COAT[getRandom(WIZARD_COAT)],
-    eyesColor: WIZARD_EYES[getRandom(WIZARD_EYES)]
-  },
-  {
-    name: WIZARD_NAMES[getRandom(WIZARD_NAMES)] + WIZARD_SURNAMES[getRandom(WIZARD_SURNAMES)],
-    coatColor: WIZARD_COAT[getRandom(WIZARD_COAT)],
-    eyesColor: WIZARD_EYES[getRandom(WIZARD_EYES)]
+const generateWizards = (len = 4) => {
+  const result = [];
+  for (let i = 0; i < len; i++) {
+    result.push({
+      name: WIZARD_NAMES[getRandom(WIZARD_NAMES)] + ' ' + WIZARD_SURNAMES[getRandom(WIZARD_SURNAMES)],
+      coatColor: WIZARD_COAT[getRandom(WIZARD_COAT)],
+      eyesColor: WIZARD_EYES[getRandom(WIZARD_EYES)]
+    });
   }
-];
+  return result;
+}
+
+const wizards = generateWizards();
 
 const renderWizard = function(wizard) {
   const wizardElement = similarWizardTemplate.cloneNode(true);
