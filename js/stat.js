@@ -11,26 +11,18 @@ const BAR_GAP = 50;
 const BAR_WIDTH = 40;
 const barHeight = 150;
 
-const renderCloud = function(ctx, x, y, color) {
+const renderCloud = (ctx, x, y, color) => {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-const lightness = () => {
+const getRandomLightness = () => {
   return Math.floor(Math.random() * 100);
 }
 
-const getMaxElement = function(times) {
-  let maxElement = times[0];
-
-  for (let i = 1; i < times.length; i++) {
-    if (times[i] > maxElement) {
-      maxElement = times[i];
-    }
-  }
-
-  return maxElement;
-};
+const getMaxElement = (array) => {
+  return Math.max.apply(null, array);
+}
 
 window.renderStatistics = function(ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
@@ -45,17 +37,19 @@ window.renderStatistics = function(ctx, names, times) {
 
   for (let i = 0; i < names.length; i++) {
 
-    const shiftBar = function() {
+    const shiftBar = () => {
       return barHeight - (barHeight* times[i]) / maxTime;
     }
 
-    if (names[i] === 'Вы') {ctx.fillStyle = 'hsl(0, 100%, 50%)'}
-    else {ctx.fillStyle = 'hsl(240, 100%, ' + lightness() + '%)'};
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'hsl(0, 100%, 50%)';
+    } else {
+      ctx.fillStyle = 'hsl(240, 100%, ' + getRandomLightness() + '%)';
+    }
 
-      ctx.fillRect(
+    ctx.fillRect(
       CLOUD_X + GAP + (BAR_GAP + BAR_WIDTH) * i,
       CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + GAP + GAP + shiftBar(),
-      // barHeight - (barHeight* times[i]) / maxTime,
       BAR_WIDTH,
       (barHeight* times[i]) / maxTime
     );
